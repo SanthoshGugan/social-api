@@ -1,0 +1,6 @@
+1. User should be able to post. Post may contain text, image.
+2. User can add or remove other users as friend.
+3. User will be able to see post of friend's posts.
+4. User can comment on posts. Comment will have only texts.
+5. User can like posts. Count of likes needs to be displayed
+

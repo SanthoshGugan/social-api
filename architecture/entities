@@ -1,0 +1,11 @@
+Entities
+**************
+=> User
+    => sid
+    => name
+    => profileDp
+
+=> Post
+    => sid
+    => authorSid
+    =>

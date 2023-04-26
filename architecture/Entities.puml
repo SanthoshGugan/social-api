@@ -1,0 +1,95 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class User {
+   - sid: String
+   - name: String
+   - profileDpUrl: String
+}
+
+class Post {
+    - sid: String
+    - authorSid: String
+    - content: String
+    - imageUrl: String
+    - likes: int
+}
+
+class Comment {
+    - sid: String
+    - parentSid: String
+    - content: String
+}
+
+class Friend {
+    - sid: String
+    - friendSid: String
+}
+
+User ..* Post
+Post --o Comment
+User ..o Friend
+
+package dao {
+
+    interface dao<T, I> {
+        + add(t: T): T
+        + update:(t: T, i: I): T
+        + remove(i: I): T
+        + get(i: I): T
+    }
+    interface UserDao<User, String> implements dao {
+        + getByName(name: String)
+    }
+
+    interface PostDao implements Dao {
+        + getAllOfUser(id: String): List<Post>
+    }
+
+    interface CommentDao implements Dao {
+        + getCommentsByPost(postSid: String): List<Comment>
+    }
+
+    interface FriendDao implements Dao {
+        + getFriendsByUser(id: String): List<String>
+    }
+
+    UserDao ..o User
+    PostDao ..o Post
+    PostDao ..o User
+    CommentDao ..o Comment
+    CommentDao ..o User
+    FriendDao ..o Friend
+
+}
+
+package service {
+    interface Service<T, I> {
+        - add(t: T): T
+        - update(t: T, id: I): T
+        - remove(id: I): T
+        - get(id: I): T
+    }
+
+    interface UserService implements Service {
+        - getByName(name: String): User
+    }
+
+    interface PostService implements Service {
+
+    }
+
+    interface CommentService implements Service {
+
+    }
+
+    interface FriendService implements Service {
+
+    }
+
+    UserService ..o dao.UserDao
+    PostService ..o dao.PostDao
+    CommentService ..o dao.CommentDao
+    FriendService ..o dao.FriendDao
+}
+@enduml
