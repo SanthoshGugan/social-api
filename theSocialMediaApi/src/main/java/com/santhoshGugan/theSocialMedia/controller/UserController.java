@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 class UserController {
 
     @Autowired
@@ -20,7 +21,7 @@ class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") String id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") String id) throws InterruptedException {
         final var userO = userService.get(id);
         if (userO.isEmpty()) {
             return ResponseEntity.notFound().build();

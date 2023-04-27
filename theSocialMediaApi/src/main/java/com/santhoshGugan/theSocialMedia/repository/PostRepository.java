@@ -1,11 +1,10 @@
 package com.santhoshGugan.theSocialMedia.repository;
 
-import com.santhoshGugan.theSocialMedia.models.User;
+import com.santhoshGugan.theSocialMedia.models.Post;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 @DependsOn("mongoTemplate")
-public interface UserRepository extends MongoRepository<User, String> {
+public interface PostRepository extends MongoRepository<Post, String> {
 
-    void deleteById(String id);
 }
