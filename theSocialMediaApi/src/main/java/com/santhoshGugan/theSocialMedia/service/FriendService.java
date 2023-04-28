@@ -6,4 +6,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FriendService extends AbstractService<FriendRepository, Friend, String> {
+
 }

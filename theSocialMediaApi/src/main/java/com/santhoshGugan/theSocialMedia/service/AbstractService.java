@@ -8,7 +8,7 @@ import java.util.Optional;
 public abstract class AbstractService<R extends MongoRepository<T, I>, T, I> {
 
     @Autowired
-    private R repo;
+    protected R repo;
 
     public T add(final T t) { return repo.insert(t); }
 

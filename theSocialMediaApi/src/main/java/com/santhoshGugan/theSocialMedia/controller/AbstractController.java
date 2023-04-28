@@ -11,7 +11,7 @@ import java.util.Optional;
 public abstract class AbstractController<S extends AbstractService, T, I> {
 
     @Autowired
-    private S s;
+    protected S s;
 
     @PostMapping
     public ResponseEntity<T> add(@RequestBody final T t) {
