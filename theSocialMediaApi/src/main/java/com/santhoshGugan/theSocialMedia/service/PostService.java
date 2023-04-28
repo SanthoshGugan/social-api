@@ -64,6 +64,17 @@ public class PostService extends AbstractService<PostRepository, Post, String> {
 
     }
 
+    public PostUserDTO getFeedById(final String postId) {
+        final var postO = repo.findById(postId);
+        if (postO.isEmpty()) return null;
+
+        final var post = postO.get();
+        final var authorO = userRepository.findById(post.getAuthorId());
+        if (authorO.isEmpty()) return null;
+        final var author = authorO.get();
+        return PostUserDTO.convert(post, author);
+    }
+
     private Map<String, User> getUserMap(final List<String> userIds) {
         final Map<String, User> userMap = new HashMap<>();
         userRepository.getUsersById(userIds).stream()
