@@ -21,6 +21,8 @@ public class UserService {
         return userRepo.findById(id);
     }
 
+    public User getByName(final String name) { return userRepo.getUserByName(name); }
+
     public void delete(final String id) { userRepo.deleteById(id);}
 
     public User update(final User user, final String id) {

@@ -14,4 +14,7 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query(" { '_id' : { $in: ?0 } }")
     List<User> getUsersById(List<String> userIds);
+
+    @Query(" { 'name' : { $eq: ?0 } } ")
+    User getUserByName(String name);
 }
