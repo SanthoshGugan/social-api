@@ -14,10 +14,14 @@ public class Comment {
     @JsonProperty("content")
     private String content;
 
-    public Comment(String id, String parentId, String content) {
+    @JsonProperty("author_id")
+    private String authorId;
+
+    public Comment(String id, String parentId, String authorId , String content) {
         this.id = id;
         this.parentId = parentId;
         this.content = content;
+        this.authorId = authorId;
     }
 
     public String getId() {
@@ -42,5 +46,13 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 }
