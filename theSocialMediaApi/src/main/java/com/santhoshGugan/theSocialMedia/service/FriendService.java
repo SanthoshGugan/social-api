@@ -36,4 +36,13 @@ public class FriendService extends AbstractService<FriendRepository, Friend, Str
                         users.get(friend.getFriendId())))
                 .collect(Collectors.toList());
     }
+
+    public List<User> getUserFriendRecommendation(final String userId) {
+        final var users = userRepository.getUsersByIdNot(userId);
+        final var friends = repo.getFriendsByUserId(userId).stream()
+                .map(user ->  user.getFriendId())
+                .collect(Collectors.toSet());
+        return users.stream().filter(user -> !friends.contains(user.getId()))
+                .collect(Collectors.toList());
+    }
 }

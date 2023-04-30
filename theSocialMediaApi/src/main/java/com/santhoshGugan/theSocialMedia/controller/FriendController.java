@@ -2,6 +2,7 @@ package com.santhoshGugan.theSocialMedia.controller;
 
 import com.santhoshGugan.theSocialMedia.dto.FriendUserDTO;
 import com.santhoshGugan.theSocialMedia.models.Friend;
+import com.santhoshGugan.theSocialMedia.models.User;
 import com.santhoshGugan.theSocialMedia.service.FriendService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,5 +18,11 @@ public class FriendController extends AbstractController<FriendService, Friend, 
     public ResponseEntity<List<FriendUserDTO>> getFriendsByUserId(@PathVariable("id") String userId) {
         final var friends = s.getFriendsByUserId(userId);
         return ResponseEntity.ok(friends);
+    }
+
+    @GetMapping("recommendation/{id}")
+    public ResponseEntity<List<User>> getFriendRecommendations(@PathVariable("id") String userId) {
+        final var friendRecommendation = s.getUserFriendRecommendation(userId);
+        return ResponseEntity.ok(friendRecommendation);
     }
 }
