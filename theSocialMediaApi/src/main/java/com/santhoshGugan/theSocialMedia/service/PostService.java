@@ -17,10 +17,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -73,6 +70,18 @@ public class PostService extends AbstractService<PostRepository, Post, String> {
         if (authorO.isEmpty()) return null;
         final var author = authorO.get();
         return PostUserDTO.convert(post, author);
+    }
+
+    public List<PostUserDTO> getPostsByUserId(final String userId) {
+        final var myPosts = repo.getPostsByUser(userId);
+
+        final var user = userRepository.findById(userId).orElse(null);
+
+        if (user == null) return Collections.emptyList();
+
+        return myPosts.stream()
+                .map(post -> PostUserDTO.convert(post, user))
+                .collect(Collectors.toList());
     }
 
     private Map<String, User> getUserMap(final List<String> userIds) {

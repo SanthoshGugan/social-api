@@ -9,12 +9,16 @@ public class Post {
     @Id
     private String id;
 
-    @JsonProperty("author_id")
+    @JsonProperty("authorId")
     private String authorId;
+
+    @JsonProperty("content")
     private String content;
 
-    @JsonProperty("image_url")
+    @JsonProperty("imageUrl")
     private String imageUrl;
+
+    @JsonProperty("likes")
     private int likes;
 
     public Post(String id, String authorId, String content, String imageUrl) {

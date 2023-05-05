@@ -13,4 +13,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
 
     @Query(" { 'authorId' : { $in: ?0 } } ")
     List<Post> getFriendsPost(List<String> friendIds, Pageable pageable);
+
+    @Query(" { 'authorId' : { $eq: ?0 } }")
+    List<Post> getPostsByUser(String userId);
 }

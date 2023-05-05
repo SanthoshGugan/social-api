@@ -25,4 +25,11 @@ public class PostController extends AbstractController<PostService, Post, String
         if (postUserDto == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(postUserDto);
     }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<PostUserDTO>> getPostByUserId(@PathVariable("userId") final String userId) {
+        final var posts = s.getPostsByUserId(userId);
+        return ResponseEntity.ok(posts);
+    }
+
 }

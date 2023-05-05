@@ -13,7 +13,7 @@ public class PostUserDTO {
 
     private String imageUrl;
 
-    @JsonProperty("authorIid")
+    @JsonProperty("authorId")
     private String authorId;
 
     private int likes;
