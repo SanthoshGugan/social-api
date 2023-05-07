@@ -3,9 +3,14 @@ package com.santhoshGugan.theSocialMedia.controller;
 import com.santhoshGugan.theSocialMedia.service.AbstractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.swing.text.html.Option;
+
 import java.util.Optional;
 
 public abstract class AbstractController<S extends AbstractService, T, I> {
@@ -29,14 +34,16 @@ public abstract class AbstractController<S extends AbstractService, T, I> {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") I i) {
         s.delete(i);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<T> update(@PathVariable("id") I i,
-                                    @RequestBody T t) {
+    public ResponseEntity<T> update(@PathVariable("id") final I i,
+                                    @RequestBody final T t) {
         final var updatedT = (T) s.update(t, i);
-        if (updatedT == null) return ResponseEntity.notFound().build();
+        if (updatedT == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(updatedT);
     }
 
