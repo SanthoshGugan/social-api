@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/post")
 @CrossOrigin
-public class PostController extends AbstractController<PostService, Post, String> {
+class PostController extends AbstractController<PostService, Post, String> {
 
     @GetMapping("/feeds/{id}")
     public ResponseEntity<List<PostUserDTO>> getFeed(@PathVariable("id") final String id) {

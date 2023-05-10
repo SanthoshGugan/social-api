@@ -44,6 +44,17 @@ class UserController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/name")
+    public ResponseEntity<User> addByName(@RequestBody User user) {
+        final var userExists = userService.getByName(user.getName());
+        if (userExists != null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        final var createdUser = userService.add(user);
+        return ResponseEntity.ok(user);
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") String id,
                                            @RequestBody User user) {
